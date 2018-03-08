@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>AIS Data Explorer</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+
+    <link href='css/main.css' rel='stylesheet' />
+    <link href='css/nv.d3.css' rel='stylesheet' />
+
+    <script src='js/materialize.min.js'></script>
+    <link href='css/materialize.min.css' rel='stylesheet'/>
+
+    <script src='js/d3.js'></script>
+    <script src='js/nv.d3.js'></script>
+    <script src='js/turf.min.js'></script>
+
+    <script src='data/gyaBounds.json'></script>
+    <script src='data/averages.js'></script>
+    <script src='data/numberLookups.min.js'></script>
+
+    <script src='app/mapLayers.js'></script>
+
+    <script src='app/charting.js'></script>
+    <script src='app/app.js'></script>
+
+
+
+</head>
+<body>
+
+<!-- ["GYAROADS","BOATINGNON","TRAILS","BOATINGMOT","TRAILS","GYACAMPING","MOTORIZEDW","NONMOTORIZ","ELEVATION","BOATINGALL"] -->
+
+<div id='sideBar'>
+  <a class='titleClass'>GYA AIS EXPLORER</a>
+  <div class="divider"></div>
+  <br>
+  <a class='headingClass'>Explore risk on rivers or lakes</a><br>
+  <form action="#">
+    <div class="hydroTypeRadios">
+      <input name="group1" type="radio" id="flowlines" value="flowlines" checked/>
+      <label for="flowlines">Flowlines</label>
+    </div>
+    <div class="hydroTypeRadios">
+      <input name="group1" type="radio" id="lakes" value="lakes"/>
+      <label for="lakes">Lakes</label>
+    </div>
+  </form>
+  <a class='copyClass'>Changing this option will allow you to explore risk through rivers/streams or within lakes</a><br>
+
+
+
+  <div class="divider"></div>
+  <br>
+  <a class='headingClass'>Choose a risk vector</a><br>
+  <div class="input-field col s12 blue lighten-5" id='selectHolder' >
+    <select id='nhdSymbologyDropdown' class='blue lighten-5' >
+      <option value="none">None</option>      
+      <option value="HRSKLKS">High Risk Lakes Measure</option>
+      <option value="GYAROADS">Road</option>
+      <option value="TRAILS">Trail</option>
+      <option value="BOATINGALL">Boatramps (all)</option>
+      <option value="BOATINGMOT">Boatramps (motorized)</option>
+      <option value="BOATINGNON">Boatramps (non-motorized)</option>
+      <option value="GYACAMPING">Campground</option>
+      <option value="MOTORIZEDW">Motorized Water Body</option>
+      <option value="NONMOTORIZ">Non-Motorized Water Body</option>
+      <!-- <option value="RAMPS5KMNRM">Boatramps within 5km</option> -->
+
+    </select>
+  </div>
+  <a class='copyClass'>Changing the risk vector will resymbolize stream segments based on their distance to potential sources of aquatic invasives.</a><br>
+
+
+
+  <!-- <div class="divider"></div>
+  <br> -->
+
+  <!-- <a class='headingClass'>Choose a geography of interest</a><br>
+  <div class="input-field col s12 blue lighten-5" id='selectHolder' >
+    <select id='geographySelector' class='blue lighten-5' >
+      <option value="gya">All GYA</option>
+      <option value="fedAdmin">Federal Administrative Unit</option>
+      <option value="county">County</option>
+      <option value="state">State</option>
+      <option value="huc12">Watershed (HUC12)</option>
+    </select>
+  </div>
+  <a class='copyClass'>Changing the geography of interest will symbolize flowlines based on the distribution within their respective geography or administrative unit.</a><br> -->
+
+  <div class="divider"></div>
+  <br>
+  <a class='headingClass'>Risk Distribution</a><br>
+  <div id='chart' >
+    <svg>
+  </div>
+  <a class='copyClass'>This histogram shows the distribution of flowlines/lakes within the current, rendered extent of the map.</a><br>
+
+
+</div>
+
+
+
+
+
+
+
+<div id='hoverBox'>
+</div>
+
+
+
+<div id='map'>
+
+  <div id="mapLegend">
+  </div>
+
+</div>
+
+
+</body>
+</html>

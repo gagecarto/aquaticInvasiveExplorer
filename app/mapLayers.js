@@ -713,6 +713,18 @@ function addMapLayers(){
     map.on('moveend', function() {
       queryViewportFeatures()
     });
+
+
+    if(document.location.hash){
+      var thisHash=document.location.hash;
+      if(thisHash.indexOf('bnds=')>-1){
+        thisHash=thisHash.split('bnds=')[1]
+        var theseBounds=thisHash.split(',').map(function(bnd) {
+            return Number(bnd);
+        });
+        map.fitBounds(theseBounds)
+      }
+    }
 }
 
 function queryViewportFeatures(){

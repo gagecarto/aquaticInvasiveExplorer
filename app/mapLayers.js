@@ -725,6 +725,7 @@ function addMapLayers(){
         map.fitBounds(theseBounds)
       }
     }
+
 }
 
 function queryViewportFeatures(){
